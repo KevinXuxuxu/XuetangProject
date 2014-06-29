@@ -1,5 +1,23 @@
 source 'https://rubygems.org'
 
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'sqlite3'
+  gem 'simplecov'
+end
+group :debug do
+  # To use debugger
+  gem 'debugger'
+end
+group :test do
+  gem 'cucumber-rails', :require => false 
+  gem 'factory_girl_rails', :require => false
+  gem 'ZenTest'
+  gem 'selenium-webdriver', :require => false
+end
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 
@@ -31,6 +49,14 @@ group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
+
+# use haml
+gem 'haml'
+gem "haml-rails"
+gem "carrierwave"
+gem "mini_magick"
+# use coverall
+gem 'coveralls', require: false
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
