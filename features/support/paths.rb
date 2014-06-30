@@ -18,6 +18,7 @@ module NavigationHelpers
 
     when /^the user list page/ then '/users'
     when /^the category list page/ then '/catrgories'
+    when /^the article list page/ then '/articles'
       
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
