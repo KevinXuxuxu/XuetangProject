@@ -6,6 +6,7 @@
     %tr
       %th Title
       %th Author
+      %th Category
       %th 
       %th 
       %th 
@@ -14,6 +15,7 @@
       %tr
         %td= article.title
         %td= article.author.name
+        %td= article.category.name
         %td= link_to 'Show', article
         %td= link_to 'Edit', edit_article_path(article)
         %td= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } 
