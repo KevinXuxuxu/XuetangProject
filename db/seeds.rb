@@ -15,6 +15,6 @@ xuetang = Category.create({name: "Xuetang", description: "A program of pandas"})
 yclass = Category.create({name: "Yao Class", description: "A class of hanzi", parent: xuetang})
 
 
-articles = Article.create([{title: "Encore", content: "What the hell are you waiting for?", author: users[0]},
-                           {title: "Catalyst", content: "Will we burn inside the fire of a thousand suns?", author: users[3]},
-                           {title: "Gougou Ju gets Turing Award", content: "RT", author: users[1]}])
+articles = Article.create([{title: "Encore", content: "What the hell are you waiting for?", author: users[0], category: xuetang},
+                           {title: "Catalyst", content: "Will we burn inside the fire of a thousand suns?", author: users[3], category: xuetang},
+                           {title: "Gougou Ju gets Turing Award", content: "RT", author: users[1], category: yclass}])
