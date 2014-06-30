@@ -25,4 +25,5 @@ Background: articles and their information are in the database
 
 Scenario: show all articles and informations
   When I am on the article list page
-  Then I should see "art1"
+  Then I should see the following things: art1, JinSon, cat1
+  And I should see the following things in order: art3, JuSon, cat2
