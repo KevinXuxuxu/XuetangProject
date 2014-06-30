@@ -71,4 +71,12 @@ class CategoriesController < ApplicationController
     def category_params
       params[:category]
     end
+
+    def find_top_categories
+      result = []
+      Category.all.each do |category|
+        result << category unless category.parent
+      end
+      return result
+    end
 end
