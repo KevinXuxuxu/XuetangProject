@@ -1,4 +1,4 @@
-Feature: manage articles suficiently
+Feature: manage articles efficiently
   
   As an administrator
   I want to see all articles
