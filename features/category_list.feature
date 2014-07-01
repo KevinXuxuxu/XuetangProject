@@ -17,7 +17,7 @@ Background: categories and their information are in the database
   And I am on the category list page
 
 Scenario: show all categories and their information
-  When I am on th category list page
+  When I am on the category list page
   Then I should see the following things in order: cat1, for swears, N/A
   And I should see the following things in order: cat2, for songs, cat1
   And I should see the following things in order: cat4, for sub of 2, cat2
