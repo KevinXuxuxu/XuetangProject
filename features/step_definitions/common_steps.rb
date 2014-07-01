@@ -4,9 +4,9 @@ Then /I should see (.*) before (.*)/ do | e1, e2|
   assert( page.body =~ /#{e1}.*#{e2}/m, "#{e2} appeared before #{e1}!")
 end
 
-Then /I should see the following things: (.*)/ do |things|
+Then /I should( not)? see the following things: (.*)/ do |not_, things|
   things.split(', ').each do |thing|
-    step %Q{I should see "#{thing}"}
+    step %Q{I should#{not_} see "#{thing}"}
   end
 end
 
@@ -16,8 +16,4 @@ end
 
 Then /I follow "(.*)" of "(.*)"/ do |action, target|
   step %Q{I follow "#{action}_#{target}"}
-end
-
-Then /I should be on "(.*)" page of "(.*)"/ do |page, target|
-  step %Q{I should be on }
 end
