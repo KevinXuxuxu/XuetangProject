@@ -1,4 +1,7 @@
 Xuetang::Application.routes.draw do
+  
+  root 'articles#index'
+
   resources :users
 
   resources :categories

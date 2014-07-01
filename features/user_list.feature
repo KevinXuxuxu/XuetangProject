@@ -6,10 +6,10 @@ Feature: display all users and their corresponding information
 
 Background: users and their information are in the database
   Given the following users exist:
-  | name    | stu_id  	    |
-  | JinSon | 2012012000    |
-  | JuSon  | 2012012429    |
-  | XuSon  | 2012012437    |
+  | name   |     stu_id |
+  | JinSon | 2012012000 |
+  | JuSon  | 2012012429 |
+  | XuSon  | 2012012437 |
 
   And I am on the user list page
 
