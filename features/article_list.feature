@@ -46,3 +46,20 @@ Scenario: enter edit page from show page and edit article
   Then I should be on the show page of article "doubi"
   And I should see "Wo yao fei de geng gao~~~"
   And I should see "doubi"
+
+Scenario: be able to get back to article list page
+  When I am on the show page of article "art4"
+  And I follow "Back"
+  Then I should be on the article list page
+
+Scenario: create new article
+  When I am on the article list page
+  And I follow "New Article"
+  Then I should be on the create article page
+  Then I fill in "article_title" with "the Lord of the Rings"
+  And I fill in "article_content" with "Once upon a time, there was a little Hobbit..."
+  And I fill in "article_category" with "cat2"
+  And I press "Submit"
+  Then I should be on the show page of article "the Lord of the Rings"
+  And I should see "cat2"
+  And I should see "Once upon a time, there was a little Hobbit..."
