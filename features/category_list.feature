@@ -1,4 +1,4 @@
-Feature: display all categories and information
+Feature: manage categories and their information
 
   As an administrator
   I want to see all categories
@@ -21,3 +21,9 @@ Scenario: show all categories and their information
   Then I should see the following things in order: cat1, for swears, N/A
   And I should see the following things in order: cat2, for songs, cat1
   And I should see the following things in order: cat4, for sub of 2, cat2
+
+Scenario: create new category
+  When I am on the category list page
+  And I follow "New Category"
+  Then I should be on the create category page
+  

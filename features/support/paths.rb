@@ -22,7 +22,8 @@ module NavigationHelpers
     when /^the show page of article "(.*)"/ then "/articles/#{Article.find_by_title($1).id}"
     when /^the edit page of article "(.*)"/ then "/articles/#{Article.find_by_title($1).id}/edit"
     when /^the create article page/ then '/articles/new'
-      
+    when /^the create category page/ then '/categories/new'
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
