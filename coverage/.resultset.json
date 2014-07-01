@@ -167,7 +167,7 @@
         1,
         null,
         1,
-        5,
+        1,
         null,
         null,
         null,
@@ -252,14 +252,28 @@
         null,
         null
       ],
-      "/home/joe/Joe/XuetangProject/app/models/user.rb": [
-        1,
-        1,
-        null
-      ],
       "/home/joe/Joe/XuetangProject/app/models/category.rb": [
         1,
         1,
+        1,
+        1,
+        1,
+        null,
+        1,
+        1,
+        1,
+        4,
+        null,
+        1,
+        null,
+        null,
+        1,
+        null,
+        1,
+        null,
+        null
+      ],
+      "/home/joe/Joe/XuetangProject/app/models/user.rb": [
         1,
         1,
         null
@@ -271,6 +285,6 @@
         null
       ]
     },
-    "timestamp": 1404135090
+    "timestamp": 1404141763
   }
 }

@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.all
+    @categories = Category.find_top_categories
   end
 
   # GET /categories/1
@@ -70,13 +70,5 @@ class CategoriesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_params
       params[:category]
-    end
-
-    def find_top_categories
-      result = []
-      Category.all.each do |category|
-        result << category unless category.parent
-      end
-      return result
     end
 end
