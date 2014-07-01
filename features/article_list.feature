@@ -1,4 +1,4 @@
-Feature: display all articles and information
+Feature: manage articles suficiently
   
   As an administrator
   I want to see all articles
@@ -27,3 +27,22 @@ Scenario: show all articles and informations
   When I am on the article list page
   Then I should see the following things: art1, JinSon, cat1
   And I should see the following things in order: art3, JuSon, cat2
+
+Scenario: show specific article and it's detailed information
+  When I am on the article list page
+  Then I follow "Show" of "art3"
+  Then I should be on the show page of article "art3"
+  And I should see the following things: art3, cat2, JuSon
+  And I should see "Marry has a little lamb, ..."
+
+Scenario: enter edit page from show page and edit article
+  When I am on the show page of article "art3"
+  And I follow "Edit"
+  Then I should be on the edit page of article "art3"
+  And I should see "Marry has a little lamb, ..."
+  Then I fill in "article_content" with "Wo yao fei de geng gao~~~"
+  And I fill in "article_title" with "doubi"
+  When I press "Submit"
+  Then I should be on the show page of article "doubi"
+  And I should see "Wo yao fei de geng gao~~~"
+  And I should see "doubi"

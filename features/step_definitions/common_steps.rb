@@ -13,3 +13,11 @@ end
 Then /I should see the following things in order: (.*)/ do |things|
   assert( page.body =~ /#{things.gsub(/, /, ".*")}/m)
 end
+
+Then /I follow "(.*)" of "(.*)"/ do |action, target|
+  step %Q{I follow "#{action}_#{target}"}
+end
+
+Then /I should be on "(.*)" page of "(.*)"/ do |page, target|
+  step %Q{I should be on }
+end
