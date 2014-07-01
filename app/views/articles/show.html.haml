@@ -1,6 +1,6 @@
 %h2= @article.title
-%strong= @article.category.name
-%p= @article.author.name
+%strong= if @article.category then @article.category.name else 'No category' end
+%p= if @article.author then @article.author.name else 'No author' end
 %p#notice= notice
 %p= @article.content
 =link_to 'Edit', edit_article_path(@article) |
