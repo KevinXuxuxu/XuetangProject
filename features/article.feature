@@ -18,7 +18,7 @@ Background: articles and their information are in the database
   | title | content                        | category | author |
   | art1  | f*ck off                       | cat1     | JinSon |
   | art2  | F*ck off.                      | cat1     | JinSon |
-  | art3  | Marry has a little lamb, ...   | cat2     | JuSon  |
+  | art3  | Marry has a little lamb, ...   | cat1     | JuSon  |
   | art4  | Only you, can make all this... | cat2     | XuSon  |
 
   And I am on the article list page
@@ -26,13 +26,13 @@ Background: articles and their information are in the database
 Scenario: show all articles and informations
   When I am on the article list page
   Then I should see the following things: art1, JinSon, cat1
-  And I should see the following things in order: art3, JuSon, cat2
+  And I should see the following things in order: art3, JuSon, cat1
 
 Scenario: show specific article and it's detailed information
   When I am on the article list page
   Then I follow "Show" of "art3"
   Then I should be on the show page of article "art3"
-  And I should see the following things: art3, cat2, JuSon
+  And I should see the following things: art3, cat1, JuSon
   And I should see "Marry has a little lamb, ..."
 
 Scenario: enter edit page from show page and edit article
