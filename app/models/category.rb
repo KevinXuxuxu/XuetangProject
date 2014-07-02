@@ -15,5 +15,12 @@ class Category < ActiveRecord::Base
   private
 
   def process_sub_cats
+    if self.children.size != 0
+      old_parent = self.parent
+      self.children.each do |child|
+        child.parent = old_parent
+        child.save
+      end
+    end
   end
 end
