@@ -1,5 +1,5 @@
 Feature: manage articles efficiently
-  
+
   As an administrator
   I want to see all articles
   So I can manage them
