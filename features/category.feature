@@ -52,3 +52,19 @@ Scenario: show sub category
   When I follow "cat4"
   Then I should be on the sub-category page of "cat4"
   And I should see the following things in order: cat5, for sub of 4, cat4
+
+Scenario: edit category
+  When I am on the category list page
+  And I follow "edit" of "cat2"
+  Then I should be on the edit page of category "cat2"
+  Then I fill in "category_name" with "new_name"
+  And I fill in "category_description" with "new whatever bolocks..."
+  And I press "Update Category"
+  Then I should be on the category list page
+  And I should see the following things in order: new_name, new whatever bolocks..., N/A
+
+Scenario: destroy category
+  When I am on the category list page
+  And I follow "destroy" of "cat2"
+  Then I should be on the category list page
+  And I should not see "cat2"
