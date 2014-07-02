@@ -1,6 +1,6 @@
 Xuetang::Application.routes.draw do
-  
-  root 'articles#index'
+
+  root 'index#index'
 
   resources :users
 
@@ -48,7 +48,7 @@ Xuetang::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'

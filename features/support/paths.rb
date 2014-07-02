@@ -16,13 +16,18 @@ module NavigationHelpers
     # when /^the (RottenPotatoes )?home\s?page$/ then '/movies'
     # when /^the movies page$/ then '/movies'
 
+    # user
     when /^the user list page/ then '/users'
-    when /^the category list page/ then '/categories'
+    # article
     when /^the article list page/ then '/articles'
     when /^the show page of article "(.*)"/ then "/articles/#{Article.find_by_title($1).id}"
     when /^the edit page of article "(.*)"/ then "/articles/#{Article.find_by_title($1).id}/edit"
     when /^the create article page/ then '/articles/new'
+    # category
+    when /^the category list page/ then '/categories'
     when /^the create category page/ then '/categories/new'
+    when /^the sub-category page of "(.*)"/ then "/categories/#{Category.find_by_name($1).id}"
+    when /^the edit page of category "(.*)"/ then "/categories/#{Category.find_by_name($1).id}/edit"
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

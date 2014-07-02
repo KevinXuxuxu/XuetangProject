@@ -11,10 +11,24 @@ users = User.create([{name: "Gougou Jin", stu_id: "2012012000"},
                      {name: "Gougou Ju",  stu_id: "2012012222"},
                      {name: "Xuxu",       stu_id: "2012012333"}])
 
-xuetang = Category.create({name: "Xuetang", description: "A program of pandas"})
-yclass = Category.create({name: "Yao Class", description: "A class of hanzi", parent: xuetang})
+#xuetang = Category.create({name: "Xuetang", description: "A program of pandas"})
+#yclass = Category.create({name: "Yao Class", description: "A class of hanzi", parent: xuetang})
+top_category_list = [{name: 'Xuetang', description: "A program of pandas"},
+                 {name: 'Yao Class', description: "No meizi"},
+                 {name: 'Qian Class', description: "No meizi either"},
+                 {name: 'Life Science', description: "Some meizi"},
+                 {name: 'News', description: "happend few years ago"}]
+
+Category.create(top_category_list)
+
+sub_category_list = [{name: 'Ji20', description: "doubi", parent: Category.find_by_name("Yao Class")},
+                     {name: 'Ji10', description: "doubi^2", parent: Category.find_by_name("Yao Class")},
+                     {name: 'Ji00', description: "dasi dog", parent: Category.find_by_name("Yao Class")}]
+
+Category.create(sub_category_list)
 
 
-articles = Article.create([{title: "Encore", content: "What the hell are you waiting for?", author: users[0], category: xuetang},
-                           {title: "Catalyst", content: "Will we burn inside the fire of a thousand suns?", author: users[3], category: xuetang},
-                           {title: "Gougou Ju gets Turing Award", content: "RT", author: users[1], category: yclass}])
+
+articles = Article.create([{title: "Encore", content: "What the hell are you waiting for?", author: users[0], category: Category.find_by_name('Xuetang')},
+                           {title: "Catalyst", content: "Will we burn inside the fire of a thousand suns?", author: users[3], category: Category.find_by_name('Xuetang')},
+                           {title: "Gougou Ju gets Turing Award", content: "RT", author: users[1], category: Category.find_by_name('Yao Class')}])
