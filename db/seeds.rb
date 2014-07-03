@@ -27,7 +27,11 @@ sub_category_list = [{name: 'Ji20', description: "doubi", parent: Category.find_
 
 Category.create(sub_category_list)
 
+course_list = [{name: 'Algorithm Design', description: 'hehe', teacher: 'Papa', location: 'Xuetang112', ctime: 16, belong: 'Yaoclass'},
+            {name: 'Cryptograpy', description: 'lethal', teacher: 'Yuyu', location: 'Xuetang112', ctime: 7, belong: 'Yaoclass'},
+            {name: 'Mechanic', description: 'whatever', teacher: 'Newton', location: '6A105', ctime: 20, belong: 'Qianclass'}]
 
+Course.create(course_list)
 
 articles = Article.create([{title: "Encore", content: "What the hell are you waiting for?", author: users[0], category: Category.find_by_name('Xuetang')},
                            {title: "Catalyst", content: "Will we burn inside the fire of a thousand suns?", author: users[3], category: Category.find_by_name('Xuetang')},
