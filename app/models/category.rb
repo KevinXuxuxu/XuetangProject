@@ -23,20 +23,20 @@ class Category < ActiveRecord::Base
 
   def set_proper_order
     if self.parent
-      tem_size = self.parent.children.size
+      parent_id = self.parent.id
+      tem_size = Category.find(parent_id).children.size
     else
       tem_size = Category.find_top_categories.size
     end
     self.order = tem_size + 1
+    return true
   end
 
   def process_sub_cats
-    if self.children.size != 0
-      old_parent = self.parent
-      self.children.each do |child|
-        child.parent = old_parent
-        child.save
-      end
+    old_parent = Category.find(self.id).parent
+    self.children.each do |child|
+      child.parent = old_parent
+      child.save
     end
   end
 end

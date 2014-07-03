@@ -36,7 +36,7 @@ describe Category, :type => :model do
 
   describe "find_top_categories" do
     it "should return all topcategories" do
-      Category.stub(:all).and_return([@cat_1, @cat_2, @cat_3, @cat_4])
+      allow(Category).to receive(:all).and_return([@cat_1, @cat_2, @cat_3, @cat_4])
       result = Category.find_top_categories
       expect(result).to eq([@cat_1, @cat_2])
     end
@@ -44,24 +44,18 @@ describe Category, :type => :model do
 
   describe "process_sub_cats" do
     before :each do
-      @empty_cat = Category.create(name:'empty', parent: nil)
       @parent_cat = Category.create(name: 'parent', parent: nil)
       @sub_cat_1 = Category.create(name: 'sub_1', parent: @parent_cat)
       @sub_cat_2 = Category.create(name: 'sub_2', parent: @parent_cat)
       @sub_sub_cat = Category.create(name: 'grandson', parent: @sub_cat_1)
     end
     it "should be called before the destroy" do
-      @empty_cat.should_receive(:process_sub_cats)
-      @empty_cat.destroy
-    end
-    it "should do nothing when there is no subcategories" do
-      @empty_cat.should_not_receive(:parent)
-      @empty_cat.destroy
+      expect(@parent_cat).to receive(:process_sub_cats)
+      @parent_cat.destroy
     end
     it "should move subcategories to its parent" do
       @sub_cat_1.destroy
-      @parent_cat = Category.find(@parent_cat.id)
-      expect(@parent_cat.children).to eq([@sub_cat_2, @sub_sub_cat])
+      expect(Category.find(@sub_sub_cat.id).parent).to eq(@parent_cat)
     end
     it "should move subcategories to nil when the deleted node is root" do
       @parent_cat.destroy
@@ -75,7 +69,7 @@ describe Category, :type => :model do
       @specified_list = {name: "cat", order: 10}
     end
     it "should be called before the create" do
-      Category.any_instance.should_receive(:set_proper_order)
+      expect_any_instance_of(Category).to receive(:set_proper_order)
       Category.create(@unspecified_list)
     end
   end
