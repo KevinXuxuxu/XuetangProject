@@ -24,6 +24,23 @@
       %td= link_to 'Edit', edit_course_path(course)
       %td= link_to 'Destroy', course, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
+%table
+  %tr
+    %th
+    %th Mon
+    %th Tue
+    %th Wed
+    %th The
+    %th Fri
+  - (0..5).each do |i|
+    %tr
+      %td= i+1
+      - (0..5).each do |j|
+        - if @course_table[i][j]
+          %td= link_to "#{@course_table[i][j].name}", course_path(@course_table[i][j])
+        - else
+          %td
+
 %br
 
 = link_to 'New Course', new_course_path

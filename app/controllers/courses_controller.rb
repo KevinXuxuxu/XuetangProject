@@ -1,6 +1,5 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
-  before_index :time_hash
   # GET /courses
   # GET /courses.json
   def index
@@ -12,7 +11,11 @@ class CoursesController < ApplicationController
       @course_table += [temp]
     }
     @courses.each do |course|
-
+      (0..course.ctime.size).each do |i|
+        if course.ctime[i] == '1'
+          @course_table[(i-i%6)/6][i%6] = course
+        end
+      end
     end
   end
 
