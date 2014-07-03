@@ -30,23 +30,23 @@ Background: categories and their information are in the database
 Scenario: show top categories and their information
   When I am on the category list page
   Then I should see the following things in order: cat1, for swears, N/A
-  And I should see the following things in order: cat2, for songs, cat1
-  And I should not see the following things: cat4, for sub of 2, cat2
+  And I should see the following things in order: cat2, for songs, N/A
+  And I should not see the following things: cat4, for sub of 2
 
 Scenario: create new category
   When I am on the category list page
   And I follow "New Category"
   Then I should be on the create category page
-  Then I fill in "name" with "cat6"
-  And I fill in "description" with "this is a new category!!"
-  And I fill in "parent" with "cat2"
+  Then I fill in "category_name" with "cat6"
+  And I fill in "category_description" with "this is a new category!!"
+  And I fill in "category_parent" with "cat2"
   Then I press "Submit"
   Then I should be on sub-category page of "cat2"
   And I should see the following things in order: cat5, this is a new category!!, cat2
 
 Scenario: show sub category
   When I am on the category list page
-  And I follow "cat2"
+  And I follow "show" of "cat2"
   Then I should be on the sub-category page of "cat2"
   And I should see the following things in order: cat4, for sub of 2, cat2
   When I follow "cat4"
