@@ -28,6 +28,8 @@ module NavigationHelpers
     when /^the create category page/ then '/categories/new'
     when /^the sub-category page of "(.*)"/ then "/categories/#{Category.find_by_name($1).id}"
     when /^the edit page of category "(.*)"/ then "/categories/#{Category.find_by_name($1).id}/edit"
+    # index
+    when /^the index page/ then "/"
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
