@@ -3,6 +3,7 @@ class Category < ActiveRecord::Base
   has_many :children, :foreign_key => "parent_id", :class_name => "Category"
   has_many :articles
   before_destroy :process_sub_cats
+  before_create :set_proper_order
 
   def self.find_top_categories
     result = []
@@ -12,7 +13,22 @@ class Category < ActiveRecord::Base
     return result
   end
 
+  def self.downward
+  end
+
+  def self.upward
+  end
+
   private
+
+  def set_proper_order
+    if self.parent
+      tem_size = self.parent.children.size
+    else
+      tem_size = Category.find_top_categories.size
+    end
+    self.order = tem_size + 1
+  end
 
   def process_sub_cats
     if self.children.size != 0
