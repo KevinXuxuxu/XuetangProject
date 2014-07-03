@@ -27,9 +27,9 @@ sub_category_list = [{name: 'Ji20', description: "doubi", parent: Category.find_
 
 Category.create(sub_category_list)
 
-course_list = [{name: 'Algorithm Design', description: 'hehe', teacher: 'Papa', location: 'Xuetang112', ctime: 16, belong: 'Yaoclass'},
-            {name: 'Cryptograpy', description: 'lethal', teacher: 'Yuyu', location: 'Xuetang112', ctime: 7, belong: 'Yaoclass'},
-            {name: 'Mechanic', description: 'whatever', teacher: 'Newton', location: '6A105', ctime: 20, belong: 'Qianclass'}]
+course_list = [{name: 'Algorithm Design', description: 'hehe', teacher: 'Papa', location: 'Xuetang112', ctime: '000000000000000100000000000000', belong: 'Yaoclass'},
+            {name: 'Cryptograpy', description: 'lethal', teacher: 'Yuyu', location: 'Xuetang112', ctime: '001100000000000000000000000000', belong: 'Yaoclass'},
+            {name: 'Mechanic', description: 'whatever', teacher: 'Newton', location: '6A105', ctime: '000000000000000000001000000000', belong: 'Qianclass'}]
 
 Course.create(course_list)
 

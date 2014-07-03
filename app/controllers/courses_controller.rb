@@ -1,10 +1,19 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
-
+  before_index :time_hash
   # GET /courses
   # GET /courses.json
   def index
-    @courses = Course.all
+    @courses = Course.all # will add filter soon
+    @course_table = []
+    (1..6).each {
+      temp = []
+      (1..6).each { temp += [nil]}
+      @course_table += [temp]
+    }
+    @courses.each do |course|
+
+    end
   end
 
   # GET /courses/1
