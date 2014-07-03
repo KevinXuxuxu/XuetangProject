@@ -9,9 +9,9 @@ describe CategoriesController do
     @sub_category = [@result_3]
     @top_category = [@result_1, @result_2]
 
-    Category.stub(:find).with("1").and_return(@result_1)
-    Category.stub(:find_top_categories).and_return(@top_category)
-    @result_1.stub(:children).and_return(@sub_category)
+    allow(Category).to receive(:find).with("1").and_return(@result_1)
+    allow(Category).to receive(:find_top_categories).and_return(@top_category)
+    allow(@result_1).to receive(:children).and_return(@sub_category)
   end
 
   describe "GET 'index'" do

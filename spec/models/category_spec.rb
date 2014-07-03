@@ -1,16 +1,15 @@
 require 'rails_helper'
-require 'debugger'
 
 describe Category, :type => :model do
   before :each do
     @cat_1 = FactoryGirl.create(:category, name: "cat_1", id: 1)
-    @cat_1.stub(:parent).and_return(nil)
+    allow(@cat_1).to receive(:parent).and_return(nil)
     @cat_2 = FactoryGirl.create(:category, name: "cat_2", id: 2)
-    @cat_2.stub(:parent).and_return(nil)
+    allow(@cat_2).to receive(:parent).and_return(nil)
     @cat_3 = FactoryGirl.create(:category, name: "cat_3", id: 3)
-    @cat_3.stub(:parent).and_return(@cat_1)
+    allow(@cat_3).to receive(:parent).and_return(@cat_1)
     @cat_4 = FactoryGirl.create(:category, name: "cat_4", id: 4)
-    @cat_4.stub(:parent).and_return(@cat_1)
+    allow(@cat_4).to receive(:parent).and_return(@cat_1)
   end
 
   describe "subcategory relations" do
@@ -24,6 +23,7 @@ describe Category, :type => :model do
       expect(@empty_cat.children).to eq([])
     end
     it "should return the array of children" do
+      @parent = Category.find(@parent.id)
       expect(@parent.children).to eq([@sub_cat_1, @sub_cat_2])
     end
     it "should return nil when no parent" do
@@ -41,6 +41,7 @@ describe Category, :type => :model do
       expect(result).to eq([@cat_1, @cat_2])
     end
   end
+
   describe "process_sub_cats" do
     before :each do
       @empty_cat = Category.create(name:'empty', parent: nil)
@@ -59,12 +60,24 @@ describe Category, :type => :model do
     end
     it "should move subcategories to its parent" do
       @sub_cat_1.destroy
+      @parent_cat = Category.find(@parent_cat.id)
       expect(@parent_cat.children).to eq([@sub_cat_2, @sub_sub_cat])
     end
     it "should move subcategories to nil when the deleted node is root" do
       @parent_cat.destroy
       expect(Category.find(@sub_cat_1.id).parent).to eq(nil)
     end
-
   end
+
+  describe "set_proper_order" do
+    before :each do
+      @unspecified_list = {name: "cat"}
+      @specified_list = {name: "cat", order: 10}
+    end
+    it "should be called before the create" do
+      Category.any_instance.should_receive(:set_proper_order)
+      Category.create(@unspecified_list)
+    end
+  end
+
 end
