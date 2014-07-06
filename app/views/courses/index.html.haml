@@ -14,15 +14,15 @@
 
   - @courses.each do |course|
     %tr
-      %td= course.name
-      %td= course.description
-      %td= course.location
-      %td= course.ctime
-      %td= course.belong
-      %td= course.teacher
-      %td= link_to 'Show', course
-      %td= link_to 'Edit', edit_course_path(course)
-      %td= link_to 'Destroy', course, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= course[0].name
+      %td= course[0].description
+      %td= course[0].location
+      %td= course[1]
+      %td= course[0].belong
+      %td= course[0].teacher
+      %td= link_to 'Show', course[0]
+      %td= link_to 'Edit', edit_course_path(course[0])
+      %td= link_to 'Destroy', course[0], :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %table
   %tr

@@ -7,10 +7,10 @@
       %th Title
       %th Author
       %th Category
-      %th 
-      %th 
-      %th 
-  %tbody  
+      %th
+      %th
+      %th
+  %tbody
     -@articles.each do |article|
       %tr
         %td= article.title
@@ -19,7 +19,7 @@
         %td= link_to 'Show', article, :id => "Show_#{article.title}"
         %td= link_to 'Edit', edit_article_path(article)
         %td= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' }, id: "Destroy_#{article.title}"
-  
+
 %br
 
-= link_to 'New Article', new_article_path 
+= link_to 'New Article', new_article_path

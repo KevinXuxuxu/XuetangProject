@@ -3,7 +3,15 @@ class CoursesController < ApplicationController
   # GET /courses
   # GET /courses.json
   def index
-    @courses = Course.all # will add filter soon
+    @courses = []
+    Course.all.each do |course|
+      t1 = course.ctime.index('1')
+      temp = "#{t1%6 + 1}-#{t1/6 + 1}"
+      if t2 = course.ctime.index('1',t1+1)
+        temp += ", #{t2%6 + 1}-#{t2/6 + 1}"
+      end
+      @courses += [[course,temp]]
+    end # will add filter soon
     @course_table = []
     (1..6).each {
       temp = []
@@ -11,9 +19,9 @@ class CoursesController < ApplicationController
       @course_table += [temp]
     }
     @courses.each do |course|
-      (0..course.ctime.size).each do |i|
-        if course.ctime[i] == '1'
-          @course_table[(i-i%6)/6][i%6] = course
+      (0..course[0].ctime.size).each do |i|
+        if course[0].ctime[i] == '1'
+          @course_table[(i-i%6)/6][i%6] = course[0]
         end
       end
     end
@@ -22,6 +30,11 @@ class CoursesController < ApplicationController
   # GET /courses/1
   # GET /courses/1.json
   def show
+    t1 = @course.ctime.index('1')
+    @time = "#{t1%6 + 1}-#{t1/6 + 1}"
+    if t2 = @course.ctime.index('1',t1+1)
+      @time += ", #{t2%6 + 1}-#{t2/6 + 1}"
+    end
   end
 
   # GET /courses/new
