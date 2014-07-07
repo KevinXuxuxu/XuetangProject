@@ -72,6 +72,11 @@ describe Category, :type => :model do
       expect_any_instance_of(Category).to receive(:set_proper_order)
       Category.create(@unspecified_list)
     end
+    it "should set proper even when specified" do
+      size = Category.all.size
+      new_cat = Category.create(@specified_list)
+      expect(new_cat.order).to eq(size + 1)
+    end
   end
 
 end
