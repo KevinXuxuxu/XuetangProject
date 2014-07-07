@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140702144458) do
+ActiveRecord::Schema.define(version: 20140703102103) do
 
   create_table "articles", force: true do |t|
     t.datetime "created_at"
@@ -35,6 +35,17 @@ ActiveRecord::Schema.define(version: 20140702144458) do
   end
 
   add_index "categories", ["parent_id"], name: "index_categories_on_parent_id"
+
+  create_table "courses", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "location"
+    t.string   "belong"
+    t.string   "teacher"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "ctime"
+  end
 
   create_table "users", force: true do |t|
     t.string   "name"

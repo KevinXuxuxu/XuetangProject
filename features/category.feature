@@ -49,7 +49,7 @@ Scenario: show sub category
   And I follow "show" of "cat2"
   Then I should be on the sub-category page of "cat2"
   And I should see the following things in order: cat4, for sub of 2, cat2
-  When I follow "cat4"
+  When I follow "show" of "cat4"
   Then I should be on the sub-category page of "cat4"
   And I should see the following things in order: cat5, for sub of 4, cat4
 
