@@ -13,13 +13,10 @@ class IndexController < ApplicationController
           temp = %Q{if course.#{param[0]}!= "#{param[1]}" and "#{param[1]}"!= ''
                       flag = false
                     end}
-          if param[1]!= ''
+          if param[1]!= '' and param != ['belong', 'all']
             Class.class_eval(temp)
           end
         end
-      end
-      if params['belong'] and params['belong'] != 'all' and course.belong != params['belong']
-        flag = false
       end
       if flag
         @courses += [course]

@@ -39,9 +39,6 @@
     = f.text_field :teacher
   .field
     = f.label 'blong:'
-    %select{:name => 'belong'}
-      %option{:value => 'all', :selected => 'selected'} all
-      - @belongs.each do |belong|
-        %option{:value => "#{belong}"}= "#{belong}"
+    = f.select :belong, ['all']+@belongs
   .action
     = f.submit "Submit"
