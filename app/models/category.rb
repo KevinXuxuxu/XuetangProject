@@ -29,6 +29,18 @@ class Category < ActiveRecord::Base
   def self.upward
   end
 
+  def self.new_with_parent_name params
+    p = params.dup
+    p[:parent] = Category.find_by_name(p[:parent])
+    Category.new(p)
+  end
+
+  def update_with_patent_name params
+    p = params.dup
+    p[:parent] = Category.find_by_name(p[:parent])
+    update(p)
+  end
+
   private
 
   def set_proper_order

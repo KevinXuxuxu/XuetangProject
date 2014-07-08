@@ -39,10 +39,11 @@ Scenario: create new category
   Then I should be on the create category page
   Then I fill in "category_name" with "cat6"
   And I fill in "category_description" with "this is a new category!!"
-  And I fill in "category_parent" with "cat2"
+  And I select "cat2" from "category_parent"
   Then I press "Submit"
-  Then I should be on sub-category page of "cat2"
-  And I should see the following things in order: cat5, this is a new category!!, cat2
+  Then I should be on the sub-category page of "cat6"
+  When I am on the sub-category page of "cat2"
+  And I should see the following things in order: cat6, this is a new category!!, cat2
 
 Scenario: show sub category
   When I am on the category list page
@@ -59,9 +60,11 @@ Scenario: edit category
   Then I should be on the edit page of category "cat2"
   Then I fill in "category_name" with "new_name"
   And I fill in "category_description" with "new whatever bolocks..."
-  And I press "Update Category"
-  Then I should be on the category list page
-  And I should see the following things in order: new_name, new whatever bolocks..., N/A
+  And I select "cat3" from "category_parent"
+  And I press "Submit"
+  Then I should be on the sub-category page of "new_name"
+  When I am on the sub-category page of "cat3"
+  And I should see the following things in order: new_name, new whatever bolocks..., cat3
 
 Scenario: destroy category
   When I am on the category list page

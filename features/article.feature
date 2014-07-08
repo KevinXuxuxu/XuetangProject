@@ -58,10 +58,11 @@ Scenario: create new article
   Then I should be on the create article page
   Then I fill in "article_title" with "the Lord of the Rings"
   And I fill in "article_content" with "Once upon a time, there was a little Hobbit..."
-  And I fill in "article_category" with "cat2"
+  And I select "cat2" from "article_category"
+  And I select "XuSon" from "article_author"
   And I press "Submit"
   Then I should be on the show page of article "the Lord of the Rings"
-  And I should see "cat2"
+  And I should see the following things: cat2, XuSon
   And I should see "Once upon a time, there was a little Hobbit..."
 
 Scenario: destroy article
