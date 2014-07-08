@@ -7,7 +7,14 @@ class ApplicationController < ActionController::Base
     if (session[:exp_time] > Time.now)
       return session[:sid]
     end
-    return session[:sid]
+    return nil
+  end
+
+  def currentUser
+    if (session[:exp_time] > Time.now)
+      return User.find_by_stu_id(session[:sid])
+    end
+    return nil
   end
 
 end
