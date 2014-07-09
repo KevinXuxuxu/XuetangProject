@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Kind:
+  = @message.kind
+%p
+  %b Url:
+  = @message.url
+
+= link_to 'Edit', edit_message_path(@message)
+\|
+= link_to 'Back', messages_path
