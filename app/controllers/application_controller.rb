@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   end
 
   def currentSID
-    if (session[:exp_time] > Time.now)
+    if session[:exp_time] and session[:exp_time] > Time.now
       session[:exp_time] = Time.now + exp_time
       return session[:sid]
     end
@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   end
 
   def currentUser
-    if (session[:exp_time] > Time.now)
+    if session[:exp_time] and session[:exp_time] > Time.now
       session[:exp_time] = Time.now + exp_time
       return User.find_by_stu_id(session[:sid])
     end
