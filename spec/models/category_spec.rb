@@ -61,6 +61,11 @@ describe Category, :type => :model do
       @parent_cat.destroy
       expect(Category.find(@sub_cat_1.id).parent).to eq(nil)
     end
+    it "should set order properly" do
+      @sub_cat_1.destroy
+      expect(Category.find(@sub_sub_cat.id).order).to eq(2)
+      expect(Category.find(@sub_cat_2.id).order).to eq(1)
+    end
   end
 
   describe "set_proper_order" do

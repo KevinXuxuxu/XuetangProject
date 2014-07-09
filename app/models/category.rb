@@ -13,10 +13,27 @@ class Category < ActiveRecord::Base
     return result
   end
 
-  def self.downward
+  def downward
+    if self.parent
+      bros = self.parent.children
+    else
+      bros = Cateogry.find_top_categories
+    end
+    if self.order == childs.size
+      return false
+    else
+      bros.each do |item|
+        if item.order = self.order
+          item.order = self.order - 1
+          self.order = self.order + 1
+          item.save
+          self.save
+        end
+      end
+    end
   end
 
-  def self.upward
+  def upward
   end
 
   private
@@ -33,10 +50,27 @@ class Category < ActiveRecord::Base
   end
 
   def process_sub_cats
-    old_parent = Category.find(self.id).parent
-    self.children.each do |child|
-      child.parent = old_parent
-      child.save
+    destroyed_cat = Category.find(self.id)
+    old_parent = destroyed_cat.parent
+    old_order = destroyed_cat.order
+    if old_parent
+      old_parent.children.each do |child|
+        if child.order > old_order
+          child.order = child.order - 1
+          child.save
+        end
+      end
+      tem_order = old_parent.children.size - 1
+      self.children.each do |child|
+        child.parent = old_parent
+        child.order = child.order + tem_order
+        child.save
+      end
+    else
+      self.children.each do |child|
+        child.parent = nil
+        child.save
+      end
     end
   end
 end
