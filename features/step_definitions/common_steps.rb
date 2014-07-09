@@ -17,3 +17,7 @@ end
 Then /I follow "(.*)" of "(.*)"/ do |action, target|
   step %Q{I follow "#{action}_#{target}"}
 end
+
+Then /I login as "(.*)"/ do |name|
+  step %Q{I am on the login page of "#{name}"}
+end

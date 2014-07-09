@@ -21,6 +21,7 @@ Background: articles and their information are in the database
   | art3  | Marry has a little lamb, ...   | cat1     | JuSon  |
   | art4  | Only you, can make all this... | cat2     | XuSon  |
 
+  And I login as "XuSon"
   And I am on the article list page
 
 Scenario: show all articles and informations
@@ -59,7 +60,6 @@ Scenario: create new article
   Then I fill in "article_title" with "the Lord of the Rings"
   And I fill in "article_content" with "Once upon a time, there was a little Hobbit..."
   And I select "cat2" from "article_category"
-  And I select "XuSon" from "article_author"
   And I press "Submit"
   Then I should be on the show page of article "the Lord of the Rings"
   And I should see the following things: cat2, XuSon
