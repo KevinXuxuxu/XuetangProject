@@ -17,23 +17,33 @@ class Category < ActiveRecord::Base
     if self.parent
       bros = self.parent.children
     else
-      bros = Cateogry.find_top_categories
+      bros = Category.find_top_categories
     end
-    if self.order == childs.size
-      return false
-    else
-      bros.each do |item|
-        if item.order = self.order
-          item.order = self.order - 1
-          self.order = self.order + 1
-          item.save
-          self.save
-        end
+    bros.each do |item|
+      if item.order == self.order + 1
+        item.order = self.order
+        self.order = self.order + 1
+        item.save
+        self.save
       end
     end
   end
 
   def upward
+    if self.parent
+      bros = self.parent.children
+    else
+      bros = Category.find_top_categories
+    end
+
+    bros.each do |item|
+      if item.order == self.order - 1
+        item.order = self.order
+        self.order = self.order - 1
+        item.save
+        self.save
+      end
+    end
   end
 
   private

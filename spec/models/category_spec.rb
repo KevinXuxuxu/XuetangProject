@@ -42,6 +42,62 @@ describe Category, :type => :model do
     end
   end
 
+  describe "downward" do
+    before :each do
+      @tem_size = Category.find_top_categories.size
+      @top_cat_1 = Category.create(name: "top_1", parent: nil)
+      @top_cat_2 = Category.create(name: "top_2", parent: nil)
+      @top_cat_3 = Category.create(name: "top_2", parent: nil)
+      @sub_cat_1 = Category.create(name: "sub_1", parent: Category.find(@top_cat_1.id))
+      @sub_cat_2 = Category.create(name: "sub_2", parent: Category.find(@top_cat_1.id))
+      @sub_cat_3 = Category.create(name: "sub_3", parent: Category.find(@top_cat_1.id))
+    end
+    it "should be able to arrange top categories" do
+      @top_cat_2.downward
+      expect(Category.find(@top_cat_1.id).order).to eq(@tem_size + 1)
+      expect(Category.find(@top_cat_2.id).order).to eq(@tem_size + 3)
+      expect(Category.find(@top_cat_3.id).order).to eq(@tem_size + 2)
+    end
+    it "should be able to arrange sub categories" do
+      @sub_cat_2.downward
+      expect(Category.find(@sub_cat_1.id).order).to eq(1)
+      expect(Category.find(@sub_cat_2.id).order).to eq(3)
+      expect(Category.find(@sub_cat_3.id).order).to eq(2)
+    end
+    it "should leave the category unchanged if it is at bottom" do
+      @sub_cat_3.downward
+      expect(Category.find(@sub_cat_3.id).order).to eq(3)
+    end
+  end
+
+  describe "upward" do
+    before :each do
+      @tem_size = Category.find_top_categories.size
+      @top_cat_1 = Category.create(name: "top_1", parent: nil)
+      @top_cat_2 = Category.create(name: "top_2", parent: nil)
+      @top_cat_3 = Category.create(name: "top_2", parent: nil)
+      @sub_cat_1 = Category.create(name: "sub_1", parent: Category.find(@top_cat_1.id))
+      @sub_cat_2 = Category.create(name: "sub_2", parent: Category.find(@top_cat_1.id))
+      @sub_cat_3 = Category.create(name: "sub_3", parent: Category.find(@top_cat_1.id))
+    end
+    it "should be able to arrange top categories" do
+      @top_cat_2.upward
+      expect(Category.find(@top_cat_1.id).order).to eq(@tem_size + 2)
+      expect(Category.find(@top_cat_2.id).order).to eq(@tem_size + 1)
+      expect(Category.find(@top_cat_3.id).order).to eq(@tem_size + 3)
+    end
+    it "should be able to arrange sub categories" do
+      @sub_cat_2.upward
+      expect(Category.find(@sub_cat_1.id).order).to eq(2)
+      expect(Category.find(@sub_cat_2.id).order).to eq(1)
+      expect(Category.find(@sub_cat_3.id).order).to eq(3)
+    end
+    it "should leave the category unchanged if it is at bottom" do
+      @sub_cat_1.upward
+      expect(Category.find(@sub_cat_1.id).order).to eq(1)
+    end
+  end
+
   describe "process_sub_cats" do
     before :each do
       @parent_cat = Category.create(name: 'parent', parent: nil)
