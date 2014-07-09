@@ -1,7 +1,7 @@
 %h1 XueTang Project!!
 %h4 fear me!!! 2333333
 %br
-= "[sid = #{@currentSID}], username = #{@user.name}"
+= "[sid = #{@currentSID ? @currentSID : "<nil>"}], username = #{@user ? @user.name : "<nil>"}"
 %table
   %thead
     %tr
