@@ -1,6 +1,16 @@
 - if @user
   %h1 Personal Page
   %h4= "   of #{@user.name}"
+  Informations:
+  %table
+    %thead
+      %tr
+        %th name
+        %th student ID
+    %tbody
+      %tr
+        %td= @user.name
+        %td= @user.stu_id
   Messages:
   %table
     %thead
