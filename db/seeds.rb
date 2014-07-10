@@ -32,3 +32,6 @@ Category.create(sub_category_list)
 articles = Article.create([{title: "Encore", content: "What the hell are you waiting for?", author: users[0], category: Category.find_by_name('Xuetang')},
                            {title: "Catalyst", content: "Will we burn inside the fire of a thousand suns?", author: users[3], category: Category.find_by_name('Xuetang')},
                            {title: "Gougou Ju gets Turing Award", content: "RT", author: users[1], category: Category.find_by_name('Yao Class')}])
+
+Message.create([{kind: "test", url:"articles/1", status: "active", user: User.find_by_stu_id('2012012333')},
+                {kind: "test", url:"category/1", status: "active", user: User.find_by_stu_id('2012012333')}])

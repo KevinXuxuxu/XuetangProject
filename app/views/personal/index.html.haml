@@ -11,7 +11,7 @@
       - @messages.each do |message|
         %tr
           %td= message.kind
-          %td= link_to "#{message.url}", "#{message.url}"+"#{message.id}"
+          %td= link_to "#{message.url}", "messages/#{message.id}"
 - else
   %h1{:style => "color:red;"} Please login first!
   = link_to 'Index', root_path
