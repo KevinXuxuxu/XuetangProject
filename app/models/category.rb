@@ -13,7 +13,6 @@ class Category < ActiveRecord::Base
     return result
   end
 
-<<<<<<< HEAD
   def downward
     if self.parent
       bros = self.parent.children
@@ -28,7 +27,8 @@ class Category < ActiveRecord::Base
         self.save
       end
     end
-=======
+  end
+
   def find_sub_categories
     sub_categories = []
     Category.all.each do |category|
@@ -37,10 +37,6 @@ class Category < ActiveRecord::Base
       end
     end
     return sub_categories
-  end
-
-  def self.downward
->>>>>>> master
   end
 
   def upward
