@@ -29,16 +29,6 @@ class Category < ActiveRecord::Base
     end
   end
 
-  def find_sub_categories
-    sub_categories = []
-    Category.all.each do |category|
-      if category.parent == self
-        sub_categories += [category]
-      end
-    end
-    return sub_categories
-  end
-
   def upward
     if self.parent
       bros = self.parent.children
