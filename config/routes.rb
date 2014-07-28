@@ -1,5 +1,9 @@
 Xuetang::Application.routes.draw do
 
+  resources :topics
+
+  resources :posts
+
   root 'index#index'
 
   resources :users
