@@ -4,7 +4,7 @@ class TopicsController < ApplicationController
   # GET /topics
   # GET /topics.json
   def index
-    @topics = Topic.all
+    @topics = Topic.find_top_topics
   end
 
   # GET /topics/1
@@ -65,6 +65,7 @@ class TopicsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_topic
       @topic = Topic.find(params[:id])
+      @sub_topics = @topic.children
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
