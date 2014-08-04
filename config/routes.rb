@@ -1,5 +1,7 @@
 Xuetang::Application.routes.draw do
 
+  resources :comments
+
   resources :topics
 
   resources :posts
