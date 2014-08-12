@@ -15,6 +15,7 @@ class CommentsController < ApplicationController
   # GET /comments/new
   def new
     @comment = Comment.new
+    render :nothing => true
   end
 
   # GET /comments/1/edit

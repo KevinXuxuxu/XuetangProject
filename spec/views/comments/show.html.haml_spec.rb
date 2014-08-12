@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "comments/show", :type => :view do
+RSpec.describe "comments/show", :type => :view, :pending => true do
   before(:each) do
     @comment = assign(:comment, Comment.create!(
       :content => "MyText",

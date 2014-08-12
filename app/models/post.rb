@@ -8,7 +8,7 @@ class Post < ActiveRecord::Base
   private
   def delete_comments
     self.comments.each do |comment|
-      comment.delete
+      comment.destroy
     end
   end
 end
