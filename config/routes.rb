@@ -2,6 +2,12 @@ Xuetang::Application.routes.draw do
 
   resources :messages
 
+  resources :comments
+
+  resources :topics
+
+  resources :posts
+
   root 'index#index'
 
   resources :users

@@ -13,20 +13,37 @@ class Category < ActiveRecord::Base
     return result
   end
 
-  def find_sub_categories
-    sub_categories = []
-    Category.all.each do |category|
-      if category.parent == self
-        sub_categories += [category]
+  def downward
+    if self.parent
+      bros = self.parent.children
+    else
+      bros = Category.find_top_categories
+    end
+    bros.each do |item|
+      if item.order == self.order + 1
+        item.order = self.order
+        self.order = self.order + 1
+        item.save
+        self.save
       end
     end
-    return sub_categories
   end
 
-  def self.downward
-  end
+  def upward
+    if self.parent
+      bros = self.parent.children
+    else
+      bros = Category.find_top_categories
+    end
 
-  def self.upward
+    bros.each do |item|
+      if item.order == self.order - 1
+        item.order = self.order
+        self.order = self.order - 1
+        item.save
+        self.save
+      end
+    end
   end
 
   def self.new_with_parent_name params
@@ -45,18 +62,35 @@ class Category < ActiveRecord::Base
 
   def set_proper_order
     if self.parent
-      tem_size = self.parent.children.size
+      parent_id = self.parent.id
+      tem_size = Category.find(parent_id).children.size
     else
       tem_size = Category.find_top_categories.size
     end
     self.order = tem_size + 1
+    return true
   end
 
   def process_sub_cats
-    if self.children.size != 0
-      old_parent = self.parent
+    destroyed_cat = Category.find(self.id)
+    old_parent = destroyed_cat.parent
+    old_order = destroyed_cat.order
+    if old_parent
+      old_parent.children.each do |child|
+        if child.order > old_order
+          child.order = child.order - 1
+          child.save
+        end
+      end
+      tem_order = old_parent.children.size - 1
       self.children.each do |child|
         child.parent = old_parent
+        child.order = child.order + tem_order
+        child.save
+      end
+    else
+      self.children.each do |child|
+        child.parent = nil
         child.save
       end
     end
