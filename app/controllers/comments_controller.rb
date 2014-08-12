@@ -10,12 +10,12 @@ class CommentsController < ApplicationController
   # GET /comments/1
   # GET /comments/1.json
   def show
+    redirect_to :back
   end
 
   # GET /comments/new
   def new
     @comment = Comment.new
-    render :nothing => true
   end
 
   # GET /comments/1/edit
@@ -25,7 +25,10 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
+    #params[:comment][:post]
     @comment = Comment.new(comment_params)
+    @comment.post = Post.find(params[:post_id].to_i)
+    @comment.author = currentUser
 
     respond_to do |format|
       if @comment.save

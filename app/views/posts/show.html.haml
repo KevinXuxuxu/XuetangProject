@@ -7,7 +7,7 @@
   %b Content:
   = @post.content
 - @post.comments.each do |comment|
-  = render 'comments/show'
+  = render partial: 'comments/show', locals: {comment: comment}
 = render 'comments/new'
 = link_to 'Edit', edit_post_path(@post)
 \|

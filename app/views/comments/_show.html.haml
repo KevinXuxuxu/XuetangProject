@@ -2,14 +2,10 @@
 
 %p
   %b Content:
-  = @comment.content
+  = comment.content
 %p
-  %b Author:
-  = @comment.author
-%p
-  %b Post:
-  = @comment.post
+  - if comment.author
+    %b Author:
+    = comment.author.name
 
-= link_to 'Edit', edit_comment_path(@comment)
-\|
-= link_to 'Back', comments_path
+= link_to 'Edit', edit_comment_path(comment)
