@@ -6,8 +6,12 @@
 %p
   %b Content:
   = @post.content
+%br
+%h3 Comments:
+
 - @post.comments.each do |comment|
   = render partial: 'comments/show', locals: {comment: comment}
+%br
 = render 'comments/new'
 = link_to 'Edit', edit_post_path(@post)
 \|

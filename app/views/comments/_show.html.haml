@@ -1,11 +1,7 @@
-%p#notice= notice
-
 %p
-  %b Content:
-  = comment.content
-%p
-  - if comment.author
-    %b Author:
-    = comment.author.name
+  %b= comment.author ? "#{comment.author.name}" : "Anonymous"
+  ":#{comment.content}"
 
 = link_to 'Edit', edit_comment_path(comment)
+- if comment.author
+  = link_to 'Reply', post_path(@post, :reply => "#{comment.author.id}")
