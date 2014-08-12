@@ -1,6 +1,6 @@
 %p
   %b= comment.author ? "#{comment.author.name}" : "Anonymous"
-  ":#{comment.content}"
+  = ":#{comment.content}"
 
 = link_to 'Edit', edit_comment_path(comment)
 - if comment.author

@@ -1,17 +1,15 @@
 - if @user
   %h1 Personal Page
   %h4= "   of #{@user.name}"
-  Messages:
+  %b New messages:
   %table
-    %thead
-      %tr
-        %th kind
-        %th URL
     %tbody
       - @messages.each do |message|
         %tr
-          %td= message.kind
-          %td= link_to "#{message.url}", "messages/#{message.id}"
+          - if message.kind == "comment"
+            %td= link_to "#{message.url.scan(/#(.*)/)[0][0].gsub('_',' ')} commented your article #{Post.find(message.url.scan(/\/(.*)\#/)[0][0].to_i).title}.", "messages/#{message.id}"
+          - if message.kind == "reply"
+            %td= link_to "#{message.url.scan(/#(.*)/)[0][0].gsub('_',' ')} replied your comment under article #{Post.find(message.url.scan(/\/(.*)\#/)[0][0].to_i).title}.", "messages/#{message.id}"
 - else
   %h1{:style => "color:red;"} Please login first!
   = link_to 'Index', root_path
