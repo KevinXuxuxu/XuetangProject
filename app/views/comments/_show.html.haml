@@ -3,5 +3,5 @@
   = ":#{comment.content}"
 
 = link_to 'Edit', edit_comment_path(comment)
-- if comment.author
+- if comment.author and comment.author != @currentUser
   = link_to 'Reply', post_path(@post, :reply => "#{comment.author.id}")
