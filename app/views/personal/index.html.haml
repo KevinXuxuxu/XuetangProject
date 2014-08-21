@@ -1,7 +1,21 @@
 - if @user
   %h1 Personal Page
   %h4= "   of #{@user.name}"
+<<<<<<< HEAD
   %b New messages:
+=======
+  Informations:
+  %table
+    %thead
+      %tr
+        %th name
+        %th student ID
+    %tbody
+      %tr
+        %td= @user.name
+        %td= @user.stu_id
+  Messages:
+>>>>>>> 91a88e822bd77273d1b2abb8e5eb97c587c5f14a
   %table
     %tbody
       - @messages.each do |message|
