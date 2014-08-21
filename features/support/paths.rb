@@ -30,6 +30,8 @@ module NavigationHelpers
     when /^the edit page of category "(.*)"/ then "/categories/#{Category.find_by_name($1).id}/edit"
     # index
     when /^the index page/ then "/"
+      # login
+    when /^the login page of "(.*)"/ then "/login?sid=#{User.find_by_name($1).stu_id}"
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

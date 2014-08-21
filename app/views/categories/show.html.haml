@@ -1,6 +1,8 @@
 %p#notice= notice
 
 %h2= @category.name
+= @category.description
+%br
 %br
 
 %table
@@ -24,8 +26,8 @@
               = sub_category.parent.name
             - else
               N/A
-          %td= link_to 'Show', sub_category
-          %td= link_to 'Edit', edit_category_path(sub_category)
+          %td= link_to 'Show', sub_category, :id => "show_#{sub_category.name}"
+          %td= link_to 'Edit', edit_category_path(sub_category), :id => "edit_#{sub_category.name}"
           %td= link_to 'Destroy', sub_category, method: :delete, data: {confirm: 'Are you sure?'}
   - else
     No sub categories!

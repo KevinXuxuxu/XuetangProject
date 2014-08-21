@@ -17,10 +17,10 @@ describe CategoriesController do
   describe "GET 'index'" do
     it "returns http success" do
       get 'index'
-      response.should be_success
+      expect(response).to be_success
     end
     it "should find find all top categories" do
-      Category.should_receive(:find_top_categories).and_return(@top_category)
+     expect(Category).to receive(:find_top_categories).and_return(@top_category)
       get :index
       expect(assigns(:categories)).to eq(@top_category)
     end
@@ -28,7 +28,7 @@ describe CategoriesController do
 
   describe "Show categories" do
     it "should access the database" do
-      Category.should_receive(:find)
+      expect(Category).to receive(:find)
       get :show, {:id => 1}
     end
   end

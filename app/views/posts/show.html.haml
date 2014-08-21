@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @post.title
+%p
+  %b Content:
+  = @post.content
+%br
+%h3 Comments:
+
+- @post.comments.each do |comment|
+  = render partial: 'comments/show', locals: {comment: comment}
+%br
+= render 'comments/new'
+= link_to 'Edit', edit_post_path(@post)
+\|
+= link_to 'Back', posts_path

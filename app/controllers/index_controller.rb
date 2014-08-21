@@ -2,6 +2,9 @@ class IndexController < ApplicationController
   def index
     # navigator
     @top_categories = Category.find_top_categories
+    # login status
+    @currentSID = currentSID
+    @user = currentUser
     # course table
     @belongs = Course.get_belongs #for filter
 

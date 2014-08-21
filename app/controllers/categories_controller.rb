@@ -24,7 +24,7 @@ class CategoriesController < ApplicationController
   # POST /categories
   # POST /categories.json
   def create
-    @category = Category.new(category_params)
+    @category = Category.new_with_parent_name(category_params)
 
     respond_to do |format|
       if @category.save
@@ -41,7 +41,7 @@ class CategoriesController < ApplicationController
   # PATCH/PUT /categories/1.json
   def update
     respond_to do |format|
-      if @category.update(category_params)
+      if @category.update_with_patent_name(category_params)
         format.html { redirect_to @category, notice: 'Category was successfully updated.' }
         format.json { head :no_content }
       else
@@ -65,11 +65,12 @@ class CategoriesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_category
       @category = Category.find(params[:id])
-      @sub_categories = @category.find_sub_categories
+      @sub_categories = @category.children
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
+
     def category_params
-      params[:category]
+      params[:category].permit(:name, :description, :parent)
     end
 end

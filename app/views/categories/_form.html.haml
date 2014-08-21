@@ -13,7 +13,10 @@
   .field
     = f.label :description
     = f.text_field :description
+  .field
+    = f.label :parent
+    = f.select :parent, Category.all.collect { |category| category.name }
   .action
-    = f.submit
+    = f.submit "Submit"
 
 
