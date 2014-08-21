@@ -1,9 +1,49 @@
 %h1 XueTang Project!!
 %h4 fear me!!! 2333333
+<<<<<<< HEAD
+=======
 %br
 = "[sid = #{@currentSID ? @currentSID : "<nil>"}], username = #{@user ? @user.name : "<nil>"}"
+>>>>>>> 6b2895e06d1945cf04888ba161930b7743ef9af9
 %table
   %thead
     %tr
       -@top_categories.each do |category|
         %td= link_to "#{category.name}", category_path(category)
+
+%br
+%br
+%h3 Course Table
+%table
+  %tr
+    %th= @test
+    %th Mon
+    %th Tue
+    %th Wed
+    %th The
+    %th Fri
+  - (0..5).each do |i|
+    %tr
+      %td= i+1
+      - (0..5).each do |j|
+        - if @course_table[i][j]
+          %td= link_to "#{@course_table[i][j].name}", course_path(@course_table[i][j])
+        - else
+          %td
+
+//%form{:action => '/', :method => 'get'}
+//  %input{:type => 'text', :name => 'test'}
+//  %input{:type => 'submit', :value => 'Submit'}
+%h4 Filter~
+= form_for('content') do |f|
+  .field
+    = f.label 'name:'
+    = f.text_field :name
+  .field
+    = f.label 'teacher:'
+    = f.text_field :teacher
+  .field
+    = f.label 'blong:'
+    = f.select :belong, ['all']+@belongs
+  .action
+    = f.submit "Submit"

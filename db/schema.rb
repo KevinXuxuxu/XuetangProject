@@ -47,6 +47,31 @@ ActiveRecord::Schema.define(version: 20140728034216) do
   add_index "comments", ["author_id"], name: "index_comments_on_author_id"
   add_index "comments", ["post_id"], name: "index_comments_on_post_id"
 
+<<<<<<< HEAD
+  create_table "courses", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "location"
+    t.string   "belong"
+    t.string   "teacher"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "ctime"
+  end
+
+  create_table "messages", force: true do |t|
+    t.string   "kind"
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.string   "status"
+  end
+
+  add_index "messages", ["user_id"], name: "index_messages_on_user_id"
+
+=======
+>>>>>>> 6b2895e06d1945cf04888ba161930b7743ef9af9
   create_table "posts", force: true do |t|
     t.string   "title"
     t.text     "content"
