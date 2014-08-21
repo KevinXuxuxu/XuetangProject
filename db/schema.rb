@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20140710073310) do
-=======
 ActiveRecord::Schema.define(version: 20140728034216) do
->>>>>>> 31b948ca37b216a6c05883eb2b48917f78ca9307
 
   create_table "articles", force: true do |t|
     t.datetime "created_at"
@@ -51,9 +47,6 @@ ActiveRecord::Schema.define(version: 20140728034216) do
   add_index "comments", ["author_id"], name: "index_comments_on_author_id"
   add_index "comments", ["post_id"], name: "index_comments_on_post_id"
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
   create_table "courses", force: true do |t|
     t.string   "name"
     t.text     "description"
@@ -65,7 +58,6 @@ ActiveRecord::Schema.define(version: 20140728034216) do
     t.string   "ctime"
   end
 
->>>>>>> 91a88e822bd77273d1b2abb8e5eb97c587c5f14a
   create_table "messages", force: true do |t|
     t.string   "kind"
     t.string   "url"
@@ -77,11 +69,6 @@ ActiveRecord::Schema.define(version: 20140728034216) do
 
   add_index "messages", ["user_id"], name: "index_messages_on_user_id"
 
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 6b2895e06d1945cf04888ba161930b7743ef9af9
->>>>>>> 91a88e822bd77273d1b2abb8e5eb97c587c5f14a
   create_table "posts", force: true do |t|
     t.string   "title"
     t.text     "content"
