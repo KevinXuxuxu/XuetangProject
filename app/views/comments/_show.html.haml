@@ -1,7 +1,7 @@
 %p
   %b= comment.author ? "#{comment.author.name}" : "Anonymous"
-  ":#{comment.content}"
+  = ":#{comment.content}"
 
-= link_to 'Edit', edit_comment_path(comment)
-- if comment.author
-  = link_to 'Reply', post_path(@post, :reply => "#{comment.author.id}")
+  = link_to 'Edit', edit_comment_path(comment)
+  - if comment.author and comment.author != @currentUser
+    = link_to 'Reply', post_path(@post, :reply => "#{comment.author.id}")

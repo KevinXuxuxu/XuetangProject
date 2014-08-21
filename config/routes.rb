@@ -2,17 +2,25 @@ Xuetang::Application.routes.draw do
 
 <<<<<<< HEAD
   resources :messages
+
+=======
+<<<<<<< HEAD
+  resources :messages
 =======
 <<<<<<< HEAD
   resources :courses
 =======
+>>>>>>> 91a88e822bd77273d1b2abb8e5eb97c587c5f14a
   resources :comments
 
   resources :topics
 
   resources :posts
+<<<<<<< HEAD
+=======
 >>>>>>> 6b2895e06d1945cf04888ba161930b7743ef9af9
 >>>>>>> 31b948ca37b216a6c05883eb2b48917f78ca9307
+>>>>>>> 91a88e822bd77273d1b2abb8e5eb97c587c5f14a
 
   root 'index#index'
 

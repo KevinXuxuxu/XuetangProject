@@ -10,6 +10,8 @@ class MessagesController < ApplicationController
   # GET /messages/1
   # GET /messages/1.json
   def show
+    @message.update :status => "expired"
+    redirect_to '/'+@message.url
   end
 
   # GET /messages/new
