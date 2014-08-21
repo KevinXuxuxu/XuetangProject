@@ -1,0 +1,27 @@
+- if @user
+  %h1 Personal Page
+  %h4= "   of #{@user.name}"
+  Informations:
+  %table
+    %thead
+      %tr
+        %th name
+        %th student ID
+    %tbody
+      %tr
+        %td= @user.name
+        %td= @user.stu_id
+  Messages:
+  %table
+    %thead
+      %tr
+        %th kind
+        %th URL
+    %tbody
+      - @messages.each do |message|
+        %tr
+          %td= message.kind
+          %td= link_to "#{message.url}", "#{message.url}"+"#{message.id}"
+- else
+  %h1{:style => "color:red;"} Please login first!
+  = link_to 'Index', root_path

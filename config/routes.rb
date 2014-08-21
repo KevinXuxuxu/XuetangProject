@@ -1,6 +1,9 @@
 Xuetang::Application.routes.draw do
 
 <<<<<<< HEAD
+  resources :messages
+=======
+<<<<<<< HEAD
   resources :courses
 =======
   resources :comments
@@ -9,6 +12,7 @@ Xuetang::Application.routes.draw do
 
   resources :posts
 >>>>>>> 6b2895e06d1945cf04888ba161930b7743ef9af9
+>>>>>>> 31b948ca37b216a6c05883eb2b48917f78ca9307
 
   root 'index#index'
 
@@ -23,7 +27,12 @@ Xuetang::Application.routes.draw do
 =======
   get 'login' => 'login#receive'
 
+<<<<<<< HEAD
+  get 'personal' => 'personal#index'
+
+=======
 >>>>>>> 6b2895e06d1945cf04888ba161930b7743ef9af9
+>>>>>>> 31b948ca37b216a6c05883eb2b48917f78ca9307
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
