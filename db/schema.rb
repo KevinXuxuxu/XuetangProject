@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140728034216) do
+ActiveRecord::Schema.define(version: 20140822024053) do
 
   create_table "articles", force: true do |t|
     t.datetime "created_at"
@@ -32,9 +32,21 @@ ActiveRecord::Schema.define(version: 20140728034216) do
     t.string   "description"
     t.integer  "parent_id"
     t.integer  "order"
+    t.string   "mode"
   end
 
   add_index "categories", ["parent_id"], name: "index_categories_on_parent_id"
+
+  create_table "category_privileges", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "category_id"
+    t.string   "mode"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "category_privileges", ["category_id"], name: "index_category_privileges_on_category_id"
+  add_index "category_privileges", ["user_id"], name: "index_category_privileges_on_user_id"
 
   create_table "comments", force: true do |t|
     t.text     "content"
@@ -81,6 +93,17 @@ ActiveRecord::Schema.define(version: 20140728034216) do
   add_index "posts", ["author_id"], name: "index_posts_on_author_id"
   add_index "posts", ["topic_id"], name: "index_posts_on_topic_id"
 
+  create_table "topic_privileges", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "topic_id"
+    t.string   "mode"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "topic_privileges", ["topic_id"], name: "index_topic_privileges_on_topic_id"
+  add_index "topic_privileges", ["user_id"], name: "index_topic_privileges_on_user_id"
+
   create_table "topics", force: true do |t|
     t.string   "name"
     t.string   "description"
@@ -88,6 +111,7 @@ ActiveRecord::Schema.define(version: 20140728034216) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "parent_id"
+    t.string   "mode"
   end
 
   add_index "topics", ["parent_id"], name: "index_topics_on_parent_id"
