@@ -23,7 +23,7 @@ ready = () ->
       source: tagNames.ttAdapter()
     }
   });
-
+  
 $(ready);
 $(document).on('page:load', ready);
 

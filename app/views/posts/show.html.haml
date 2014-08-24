@@ -6,6 +6,9 @@
 %p
   %b Content:
   = @post.content
+%p Tags:
+- @tags.each do |tag|
+  %div= tag.content
 %br
 %h3 Comments:
 
