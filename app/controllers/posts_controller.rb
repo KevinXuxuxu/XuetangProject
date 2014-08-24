@@ -12,6 +12,8 @@ class PostsController < ApplicationController
   def show
     @comment = Comment.new
     @currentUser = currentUser
+    
+    @tags = @post.tags
   end
 
   # GET /posts/new
@@ -43,6 +45,14 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
+
+    # updating tags
+    @post.tags.clear
+    
+    params[:post][:tags].each do |tag|
+      if !tag.empty? then @post.tags << Tag.getTag(tag) end
+    end
+    
     respond_to do |format|
       if @post.update(post_params)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
