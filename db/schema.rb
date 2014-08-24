@@ -13,8 +13,17 @@
 
 ActiveRecord::Schema.define(version: 20140824035006) do
 
-# Could not dump table "articles" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "articles", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
+    t.text     "content"
+    t.integer  "author_id"
+    t.integer  "category_id"
+  end
+
+  add_index "articles", ["author_id"], name: "index_articles_on_author_id"
+  add_index "articles", ["category_id"], name: "index_articles_on_category_id"
 
   create_table "articles_tags", id: false, force: true do |t|
     t.integer "article_id"
@@ -79,8 +88,13 @@ ActiveRecord::Schema.define(version: 20140824035006) do
   add_index "posts", ["author_id"], name: "index_posts_on_author_id"
   add_index "posts", ["topic_id"], name: "index_posts_on_topic_id"
 
-# Could not dump table "tags" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "tags", force: true do |t|
+    t.string   "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tags", ["content"], name: "index_tags_on_content"
 
   create_table "topics", force: true do |t|
     t.string   "name"

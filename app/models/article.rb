@@ -1,6 +1,7 @@
 class Article < ActiveRecord::Base
   belongs_to :author, :class_name => "User"
   belongs_to :category
+  has_and_belongs_to_many :tags
   def self.new_with_cat_name( params, current_user )
     p = params.dup
     p[:category] = Category.find_by_name(p[:category])
