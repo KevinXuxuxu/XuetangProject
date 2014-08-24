@@ -39,3 +39,6 @@ articles = Article.create([{title: "Encore", content: "What the hell are you wai
 
 Message.create([{kind: "test", url:"articles/1", status: "active", user: User.find_by_stu_id('2012012333')},
                 {kind: "test", url:"category/1", status: "active", user: User.find_by_stu_id('2012012333')}])
+
+Tag.create([{content: "Technique"}, {content: "Entertainment"}, {content: "Study"}, {content: "Activity"}]);
+
