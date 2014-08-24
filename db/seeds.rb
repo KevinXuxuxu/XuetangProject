@@ -42,3 +42,7 @@ Message.create([{kind: "test", url:"articles/1", status: "active", user: User.fi
 
 Tag.create([{content: "Technique"}, {content: "Entertainment"}, {content: "Study"}, {content: "Activity"}]);
 
+Article.find(1).tags << Tag.find(2) << Tag.find(4);
+Article.find(2).tags << Tag.find(1) << Tag.find(3);
+Article.find(3).tags << Tag.find(1) << Tag.find(2) << Tag.find(3) << Tag.find(4);
+
