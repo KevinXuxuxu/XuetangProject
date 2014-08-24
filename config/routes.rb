@@ -24,6 +24,8 @@ Xuetang::Application.routes.draw do
 
   get 'personal' => 'personal#index'
 
+  get 'tags' => 'tags#index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

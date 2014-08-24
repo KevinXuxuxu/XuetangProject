@@ -15,6 +15,9 @@
   .field
     = f.label :content
     = f.text_area :content
+  .field
+    = f.label :tags
+    = f.select(:tags, @article.tags.all.collect { |tag| tag.content }, {}, {:multiple => true})
   .action
     = f.submit "Submit"
 
