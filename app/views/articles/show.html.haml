@@ -3,5 +3,8 @@
 %p= if @article.author then @article.author.name else 'No author' end
 %p#notice= notice
 %p= @article.content
+%p= "tags:"
+- @tags.each do |tag|
+  %div= tag.content
 =link_to 'Edit', edit_article_path(@article) |
 =link_to 'Back', articles_path

@@ -72,3 +72,11 @@ gem 'therubyracer'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+gem 'twitter-bootstrap-rails'
+
+group '' do
+  gem 'bootstrap-typeahead-rails'
+  gem 'bootstrap-tagsinput-rails'
+end
+
