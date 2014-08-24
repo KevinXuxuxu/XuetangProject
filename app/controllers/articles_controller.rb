@@ -41,6 +41,14 @@ class ArticlesController < ApplicationController
   # PATCH/PUT /articles/1
   # PATCH/PUT /articles/1.json
   def update
+
+    # updating tags
+    @article.tags.clear
+    
+    params[:article][:tags].each do |tag|
+      if !tag.empty? then @article.tags << Tag.getTag(tag) end
+    end
+
     respond_to do |format|
       if @article.update_with_cat_name(article_params)
         format.html { redirect_to @article, notice: 'Article was successfully updated.' }
