@@ -13,6 +13,12 @@ class Category < ActiveRecord::Base
     return result
   end
 
+  def create_privileges user_list
+    user_list.each do |user|
+      CategoryPrivilege.create(user: user, category: self, mode: "read")
+    end
+  end
+
   def downward
     if self.parent
       bros = self.parent.children
@@ -95,5 +101,6 @@ class Category < ActiveRecord::Base
       end
     end
   end
+
 
 end

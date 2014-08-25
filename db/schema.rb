@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140822024053) do
+ActiveRecord::Schema.define(version: 20140825051237) do
 
   create_table "articles", force: true do |t|
     t.datetime "created_at"
@@ -40,9 +40,9 @@ ActiveRecord::Schema.define(version: 20140822024053) do
   create_table "category_privileges", force: true do |t|
     t.integer  "user_id"
     t.integer  "category_id"
-    t.string   "mode"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "mode"
   end
 
   add_index "category_privileges", ["category_id"], name: "index_category_privileges_on_category_id"
@@ -96,9 +96,9 @@ ActiveRecord::Schema.define(version: 20140822024053) do
   create_table "topic_privileges", force: true do |t|
     t.integer  "user_id"
     t.integer  "topic_id"
-    t.string   "mode"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "mode"
   end
 
   add_index "topic_privileges", ["topic_id"], name: "index_topic_privileges_on_topic_id"
