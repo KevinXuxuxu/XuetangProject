@@ -3,6 +3,18 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  def read_priv_level
+    return 1
+  end
+
+  def edit_priv_level
+    return 2
+  end
+
+  def create_priv_level
+    return 3
+  end
+
   def exp_time
     return 5 * 60
   end

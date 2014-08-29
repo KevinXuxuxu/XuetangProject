@@ -2,8 +2,27 @@ class Category < ActiveRecord::Base
   belongs_to :parent, :class_name => "Category"
   has_many :children, :foreign_key => "parent_id", :class_name => "Category"
   has_many :articles
+  has_many :privileges, :foreign_key => "category_id", :class_name => "CategoryPrivilege"
   before_destroy :process_sub_cats
   before_create :set_proper_order
+
+
+  def validate priv_level, tem_user
+    if self.mode == 'private'
+      self.privileges.each do |priv|
+        if priv.user == tem_user && priv.mode >= priv_level
+          return true
+        end
+      end
+      return false
+    else
+      if self.parent
+        return self.parent.validate(priv_level, tem_user)
+      else
+        return true
+      end
+    end
+  end
 
   def self.find_top_categories
     result = []

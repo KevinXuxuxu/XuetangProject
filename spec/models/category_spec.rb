@@ -12,6 +12,37 @@ describe Category, :type => :model do
     allow(@cat_4).to receive(:parent).and_return(@cat_1)
   end
 
+  describe 'validate' do
+    before :each do
+      @cat_1 = Category.create(mode: "public")
+      @cat_2 = Category.create(mode: "private")
+      @cat_3 = Category.create(mode: "public", parent: @cat_2)
+      @cat_4 = Category.create(mode: "private", parent: @cat_2)
+      @user_1 = User.create()
+      @user_2 = User.create()
+      @priv_1 = CategoryPrivilege.create(user: @user_1, category: @cat_2, mode: 2)
+      @priv_2 = CategoryPrivilege.create(user: @user_1, category: @cat_4, mode: 2)
+    end
+    it 'should block the user if not authorized' do
+      result = @cat_2.validate 1, @user_2
+      expect(result).to eq(false)
+    end
+    it 'should return true if authorized' do
+      result = @cat_2.validate 1, @user_1
+      expect(result).to eq(true)
+    end
+    it 'should check parent category if temporal category is public' do
+      expect(@cat_2).to receive(:validate).with(1, @user_1).and_return(true)
+      result = @cat_3.validate 1, @user_1
+      expect(result).to eq(true)
+    end
+    it 'should not check parent category if temporal category is private' do
+      expect(@cat_2).not_to receive(:validate)
+      @cat_4.validate 1, @user_1
+    end
+  end
+
+
   describe "subcategory relations" do
     before :each do
       @empty_cat = Category.create(name:'empty')

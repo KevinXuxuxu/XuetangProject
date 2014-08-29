@@ -10,8 +10,11 @@ describe CategoriesController do
     @top_category = [@result_1, @result_2]
 
     allow(Category).to receive(:find).with("1").and_return(@result_1)
+    allow(Category).to receive(:find).with('2').and_return(@result_2)
     allow(Category).to receive(:find_top_categories).and_return(@top_category)
     allow(@result_1).to receive(:children).and_return(@sub_category)
+    allow(@result_1).to receive(:validate).and_return(true)
+    allow(@result_2).to receive(:validate).and_return(false)
   end
 
   describe "GET 'index'" do
@@ -30,6 +33,11 @@ describe CategoriesController do
     it "should access the database" do
       expect(Category).to receive(:find)
       get :show, {:id => 1}
+    end
+    it 'should redirect when not authorized' do
+      request.env["HTTP_REFERER"] = "where_i_came_from"
+      get :show, {:id => 2}
+      expect(response).to redirect_to 'where_i_came_from'
     end
   end
 end

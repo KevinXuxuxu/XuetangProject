@@ -10,15 +10,18 @@ class CategoriesController < ApplicationController
   # GET /categories/1
   # GET /categories/1.json
   def show
+    validate read_priv_level
   end
 
   # GET /categories/new
   def new
     @category = Category.new
+    validate create_priv_level
   end
 
   # GET /categories/1/edit
   def edit
+    validate edit_priv_level
   end
 
   # POST /categories
@@ -54,6 +57,7 @@ class CategoriesController < ApplicationController
   # DELETE /categories/1
   # DELETE /categories/1.json
   def destroy
+    validate create_priv_level
     @category.destroy
     respond_to do |format|
       format.html { redirect_to categories_url }
@@ -73,4 +77,12 @@ class CategoriesController < ApplicationController
     def category_params
       params[:category].permit(:name, :description, :parent)
     end
+
+    def validate priv_level
+      unless @category.validate priv_level, currentUser
+        flash[:notice] = "You are not authorized!"
+        redirect_to :back
+      end
+    end
+
 end
