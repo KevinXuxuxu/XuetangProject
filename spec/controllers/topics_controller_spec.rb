@@ -156,4 +156,19 @@ RSpec.describe TopicsController, :type => :controller do
     end
   end
 
+  describe 'Validate' do
+    before :each do
+      @topic_1 = FactoryGirl.build(:topic, name: "One", id: 1)
+      @topic_2 = FactoryGirl.build(:topic, name: 'Two', id: 2)
+      allow(Topic).to receive(:find).with('1').and_return(@topic_1)
+      allow(Topic).to receive(:find).with('2').and_return(@topic_2)
+      allow(@topic_1).to receive(:validate).and_return(true)
+      allow(@topic_2).to receive(:validate).and_return(false)
+    end
+    it 'should block the user if not authorized' do
+      request.env["HTTP_REFERER"] = "where_i_came_from"
+      get :show, {:id => 2}
+      expect(response).to redirect_to 'where_i_came_from'
+    end
+  end
 end

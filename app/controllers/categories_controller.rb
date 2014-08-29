@@ -16,7 +16,6 @@ class CategoriesController < ApplicationController
   # GET /categories/new
   def new
     @category = Category.new
-    validate create_priv_level
   end
 
   # GET /categories/1/edit

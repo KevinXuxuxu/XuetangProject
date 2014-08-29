@@ -23,6 +23,40 @@ RSpec.describe Topic, :type => :model do
     end
   end
 
+  describe 'validate' do
+    before :each do
+      @topic_1 = Topic.create(mode: "public")
+      @topic_2 = Topic.create(mode: "private")
+      @topic_3 = Topic.create(mode: "public", parent: @topic_2)
+      @topic_4 = Topic.create(mode: "private", parent: @topic_2)
+      @user_1 = User.create()
+      @user_2 = User.create()
+      @priv_1 = TopicPrivilege.create(user: @user_1, topic: @topic_2, mode: 2)
+      @priv_2 = TopicPrivilege.create(user: @user_1, topic: @topic_4, mode: 2)
+    end
+    it 'should block the user if not authorized' do
+      result = @topic_2.validate 1, @user_2
+      expect(result).to eq(false)
+    end
+    it 'should return true if authorized' do
+      result = @topic_2.validate 1, @user_1
+      expect(result).to eq(true)
+    end
+    it 'should check parent topic if temporal topic is public' do
+      expect(@topic_2).to receive(:validate).with(1, @user_1).and_return(true)
+      result = @topic_3.validate 1, @user_1
+      expect(result).to eq(true)
+    end
+    it 'should not check parent topic if temporal topic is private' do
+      expect(@topic_2).not_to receive(:validate)
+      @topic_4.validate 1, @user_1
+    end
+    it 'should not block the user if top topic is public' do
+      result = @topic_1.validate 1, @user_2
+      expect(result).to eq(true)
+    end
+  end
+
   describe "find_top_topics" do
     it "should find all top topics" do
       @top_1 = FactoryGirl.create(:topic, name: "top_1")

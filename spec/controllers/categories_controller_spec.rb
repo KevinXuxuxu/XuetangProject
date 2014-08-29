@@ -34,6 +34,9 @@ describe CategoriesController do
       expect(Category).to receive(:find)
       get :show, {:id => 1}
     end
+  end
+
+  describe 'Validate' do
     it 'should redirect when not authorized' do
       request.env["HTTP_REFERER"] = "where_i_came_from"
       get :show, {:id => 2}

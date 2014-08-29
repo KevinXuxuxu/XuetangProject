@@ -10,6 +10,7 @@ class TopicsController < ApplicationController
   # GET /topics/1
   # GET /topics/1.json
   def show
+    validate read_priv_level
   end
 
   # GET /topics/new
@@ -19,6 +20,7 @@ class TopicsController < ApplicationController
 
   # GET /topics/1/edit
   def edit
+    validate edit_priv_level
   end
 
   # POST /topics
@@ -54,6 +56,7 @@ class TopicsController < ApplicationController
   # DELETE /topics/1
   # DELETE /topics/1.json
   def destroy
+    validate create_priv_level
     @topic.destroy
     respond_to do |format|
       format.html { redirect_to topics_url }
@@ -72,4 +75,12 @@ class TopicsController < ApplicationController
     def topic_params
       params.require(:topic).permit(:name, :description, :order)
     end
+
+    def validate priv_level
+      unless @topic.validate priv_level, currentUser
+        flash[:notice] = "You are not authorized!"
+        redirect_to :back
+      end
+    end
+
 end

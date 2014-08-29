@@ -1,9 +1,27 @@
 class Topic < ActiveRecord::Base
   belongs_to :parent, :class_name => "Topic"
   has_many :children, :foreign_key => "parent_id", :class_name => "Topic"
+  has_many :privileges, :foreign_key => "topic_id", :class_name => "TopicPrivilege"
   has_many :posts
   before_create :set_proper_order
   before_destroy :process_sub_topics
+
+  def validate priv_level, tem_user
+    if self.mode == 'private'
+      self.privileges.each do |priv|
+        if priv.user == tem_user && priv.mode >= priv_level
+          return true
+        end
+      end
+      return false
+    else
+      if self.parent
+        return self.parent.validate(priv_level, tem_user)
+      else
+        return true
+      end
+    end
+  end
 
   def self.find_top_topics
     result = []

@@ -40,6 +40,10 @@ describe Category, :type => :model do
       expect(@cat_2).not_to receive(:validate)
       @cat_4.validate 1, @user_1
     end
+    it 'should not block the user if top category is public' do
+      result = @cat_1.validate 1, @user_2
+      expect(result).to eq(true)
+    end
   end
 
 
