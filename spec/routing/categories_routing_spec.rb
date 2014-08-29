@@ -31,5 +31,13 @@ RSpec.describe CategoriesController, :type => :routing do
       expect(:delete => "/categories/1").to route_to("categories#destroy", :id => "1")
     end
 
+    it 'routes to #upward' do
+      expect(:get => "/categories/1/upward").to route_to("categories#upward", :id => '1')
+    end
+
+    it 'routes to #downward' do
+      expect(:get => "/categories/1/downward").to route_to("categories#downward", :id => '1')
+    end
+
   end
 end

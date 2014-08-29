@@ -6,7 +6,12 @@ Xuetang::Application.routes.draw do
 
   resources :comments
 
-  resources :topics
+  resources :topics do
+    member do
+      get 'upward'
+      get 'downward'
+    end
+  end
 
   resources :posts
 
@@ -14,7 +19,12 @@ Xuetang::Application.routes.draw do
 
   resources :users
 
-  resources :categories
+  resources :categories do
+    member do
+      get 'upward'
+      get 'downward'
+    end
+  end
 
   resources :articles
 

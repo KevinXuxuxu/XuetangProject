@@ -1,5 +1,5 @@
 class TopicsController < ApplicationController
-  before_action :set_topic, only: [:show, :edit, :update, :destroy]
+  before_action :set_topic, only: [:show, :edit, :update, :destroy, :upward, :downward]
 
   # GET /topics
   # GET /topics.json
@@ -23,6 +23,17 @@ class TopicsController < ApplicationController
     validate edit_priv_level
   end
 
+  def upward
+    validate edit_priv_level
+    @topic.upward
+    redirect_to :back
+  end
+
+  def downward
+    validate edit_priv_level
+    @topic.downward
+    redirect_to :back
+  end
   # POST /topics
   # POST /topics.json
   def create

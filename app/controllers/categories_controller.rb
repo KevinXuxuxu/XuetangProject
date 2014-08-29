@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:show, :edit, :update, :destroy]
+  before_action :set_category, only: [:show, :edit, :update, :destroy, :upward, :downward]
 
   # GET /categories
   # GET /categories.json
@@ -23,6 +23,17 @@ class CategoriesController < ApplicationController
     validate edit_priv_level
   end
 
+  def upward
+    validate edit_priv_level
+    @category.upward
+    redirect_to :back
+  end
+
+  def downward
+    validate edit_priv_level
+    @category.downward
+    redirect_to :back
+  end
   # POST /categories
   # POST /categories.json
   def create

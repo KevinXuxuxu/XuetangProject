@@ -31,5 +31,12 @@ RSpec.describe TopicsController, :type => :routing do
       expect(:delete => "/topics/1").to route_to("topics#destroy", :id => "1")
     end
 
+    it 'routes to #upward' do
+      expect(:get => "/topics/1/upward").to route_to("topics#upward", :id => "1")
+    end
+
+    it 'routes to #downward' do
+      expect(:get => "/topics/1/downward").to route_to('topics#downward', :id => '1')
+    end
   end
 end
