@@ -10,6 +10,7 @@ class ArticlesController < ApplicationController
   # GET /articles/1
   # GET /articles/1.json
   def show
+    validate read_priv_level
   end
 
   # GET /articles/new
@@ -19,6 +20,7 @@ class ArticlesController < ApplicationController
 
   # GET /articles/1/edit
   def edit
+    validate article_edit_priv_level
   end
 
   # POST /articles
@@ -39,6 +41,7 @@ class ArticlesController < ApplicationController
   # PATCH/PUT /articles/1
   # PATCH/PUT /articles/1.json
   def update
+    validate article_edit_priv_level
     respond_to do |format|
       if @article.update_with_cat_name(article_params)
         format.html { redirect_to @article, notice: 'Article was successfully updated.' }
@@ -53,6 +56,7 @@ class ArticlesController < ApplicationController
   # DELETE /articles/1
   # DELETE /articles/1.json
   def destroy
+    validate article_edit_priv_level
     @article.destroy
     respond_to do |format|
       format.html { redirect_to articles_url }
@@ -69,5 +73,12 @@ class ArticlesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
       params[:article].permit(:title, :content, :category)
+    end
+
+    def validate priv_level
+      unless @articles.category.validate priv_level, currentUser
+        flash[:notice] = 'You are not authorized!'
+        redirect_to :back
+      end
     end
 end

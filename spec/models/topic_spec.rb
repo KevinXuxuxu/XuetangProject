@@ -143,4 +143,48 @@ RSpec.describe Topic, :type => :model do
       expect(Topic.find(@sub_1.id).order).to eq(1)
     end
   end
+
+  describe "process_sub_topics" do
+    before :each do
+      @parent_topic = Topic.create(name: 'parent', parent: nil)
+      @sub_topic_1 = Topic.create(name: 'sub_1', parent: @parent_topic)
+      @sub_topic_2 = Topic.create(name: 'sub_2', parent: @parent_topic)
+      @sub_sub_topic = Topic.create(name: 'grandson', parent: @sub_topic_1)
+    end
+    it "should be called before the destroy" do
+      expect(@parent_topic).to receive(:process_sub_topics)
+      @parent_topic.destroy
+    end
+    it "should move subtopics to its parent" do
+      @sub_topic_1.destroy
+      expect(Topic.find(@sub_sub_topic.id).parent).to eq(@parent_topic)
+    end
+    it "should move subtopics to nil when the deleted node is root" do
+      @parent_topic.destroy
+      expect(Topic.find(@sub_topic_1.id).parent).to eq(nil)
+    end
+    it "should set order properly" do
+      @sub_topic_1.destroy
+      expect(Topic.find(@sub_sub_topic.id).order).to eq(2)
+      expect(Topic.find(@sub_topic_2.id).order).to eq(1)
+    end
+  end
+
+  describe 'process_privileges' do
+    before :each do
+      @topic = Topic.create()
+      @priv = FactoryGirl.create(:topic_privilege, topic: @topic)
+      allow(@topic).to receive(:privileges).and_return([@priv])
+      allow(@priv).to receive(:destroy)
+    end
+    it 'should be called before destroy' do
+      expect(@topic).to receive(:process_privileges)
+      @topic.destroy
+    end
+
+    it 'should delete all related privileges' do
+      expect(@priv).to receive(:destroy)
+      @topic.destroy
+    end
+  end
 end

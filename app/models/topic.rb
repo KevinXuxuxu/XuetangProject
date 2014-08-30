@@ -4,7 +4,7 @@ class Topic < ActiveRecord::Base
   has_many :privileges, :foreign_key => "topic_id", :class_name => "TopicPrivilege"
   has_many :posts
   before_create :set_proper_order
-  before_destroy :process_sub_topics
+  before_destroy :cleaning_before_destroy
 
   def validate priv_level, tem_user
     if self.mode == 'private'
@@ -21,6 +21,16 @@ class Topic < ActiveRecord::Base
         return true
       end
     end
+  end
+
+  def generate_privileges user_list, priv_level
+    if self.mode == 'public'
+      return false
+    end
+    user_list.each do |user|
+      TopicPrivilege.create(user: user, category: self, mode: priv_level)
+    end
+    return true
   end
 
   def self.find_top_topics
@@ -114,4 +124,15 @@ class Topic < ActiveRecord::Base
     end
   end
 
+  def process_privileges
+    self.privileges.each do |privilege|
+      privilege.destroy
+    end
+  end
+
+  def cleaning_before_destroy
+    # This is a wrap up for before destroy functions
+    process_sub_topics
+    process_privileges
+  end
 end

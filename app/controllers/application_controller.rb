@@ -15,6 +15,10 @@ class ApplicationController < ActionController::Base
     return 3
   end
 
+  def article_edit_priv_level
+    return 3
+  end
+
   def exp_time
     return 5 * 60
   end

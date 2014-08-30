@@ -175,4 +175,22 @@ describe Category, :type => :model do
     end
   end
 
+  describe 'process_privileges' do
+    before :each do
+      @category = Category.create()
+      @priv = FactoryGirl.create(:category_privilege, category: @category)
+      allow(@category).to receive(:privileges).and_return([@priv])
+      allow(@priv).to receive(:destroy)
+    end
+    it 'should be called before destroy' do
+      expect(@category).to receive(:process_privileges)
+      @category.destroy
+    end
+
+    it 'should delete all related privileges' do
+      expect(@priv).to receive(:destroy)
+      @category.destroy
+    end
+  end
+
 end

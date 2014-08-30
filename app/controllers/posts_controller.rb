@@ -10,6 +10,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    validate article_edit_priv_level
     @comment = Comment.new
     @currentUser = currentUser
   end
@@ -21,6 +22,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    validate article_edit_priv_level
   end
 
   # POST /posts
@@ -43,6 +45,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
+    validate article_edit_priv_level
     respond_to do |format|
       if @post.update(post_params)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
@@ -57,6 +60,7 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
+    validate article_edit_priv_level
     @post.destroy
     respond_to do |format|
       format.html { redirect_to posts_url }
@@ -74,4 +78,12 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:title, :content)
   end
+
+  def validate priv_level
+      unless @post.topic.validate priv_level, currentUser
+        flash[:notice] = 'You are not authorized!'
+        redirect_to :back
+      end
+  end
+
 end

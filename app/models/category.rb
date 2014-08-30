@@ -3,7 +3,7 @@ class Category < ActiveRecord::Base
   has_many :children, :foreign_key => "parent_id", :class_name => "Category"
   has_many :articles
   has_many :privileges, :foreign_key => "category_id", :class_name => "CategoryPrivilege"
-  before_destroy :process_sub_cats
+  before_destroy :cleaning_before_destroy
   before_create :set_proper_order
 
 
@@ -83,6 +83,16 @@ class Category < ActiveRecord::Base
     update(p)
   end
 
+  def generate_privileges user_list, priv_level
+    if self.mode == 'public'
+      return false
+    end
+    user_list.each do |user|
+      CategoryPrivilege.creaet(user: user, category: self, mode: priv_level)
+    end
+    return true
+  end
+
   private
 
   def set_proper_order
@@ -121,5 +131,16 @@ class Category < ActiveRecord::Base
     end
   end
 
+  def process_privileges
+    self.privileges.each do |privilege|
+      privilege.destroy
+    end
+  end
+
+  def cleaning_before_destroy
+    # This is a wrap up for before destroy functions
+    process_sub_cats
+    process_privileges
+  end
 
 end
