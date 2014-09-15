@@ -81,8 +81,11 @@ class CategoriesController < ApplicationController
   end
 
   # POST /categories/1/generate_privileges
+  # TODO: Implement this method
   def generate_privilege
-    validate create_priv_level
+    if params.has_key? :data
+
+    end
 
   end
 
