@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:show, :edit, :update, :destroy, :upward, :downward]
+  before_action :set_category, only: [:show, :edit, :update, :destroy, :upward, :downward, :generate_privilege]
 
   # GET /categories
   # GET /categories.json
@@ -23,19 +23,23 @@ class CategoriesController < ApplicationController
     validate edit_priv_level
   end
 
+  # GET /category/1/upward
   def upward
     validate edit_priv_level
     @category.upward
     redirect_to :back
   end
 
+  # GET /category/1/downward
   def downward
     validate edit_priv_level
     @category.downward
     redirect_to :back
   end
+
   # POST /categories
   # POST /categories.json
+  # TODO: Set privilege check for create
   def create
     @category = Category.new_with_parent_name(category_params)
 
@@ -53,6 +57,7 @@ class CategoriesController < ApplicationController
   # PATCH/PUT /categories/1
   # PATCH/PUT /categories/1.json
   def update
+    validate edit_priv_level
     respond_to do |format|
       if @category.update_with_patent_name(category_params)
         format.html { redirect_to @category, notice: 'Category was successfully updated.' }
@@ -75,6 +80,12 @@ class CategoriesController < ApplicationController
     end
   end
 
+  # POST /categories/1/generate_privileges
+  def generate_privilege
+    validate create_priv_level
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_category
@@ -88,9 +99,9 @@ class CategoriesController < ApplicationController
       params[:category].permit(:name, :description, :parent)
     end
 
-    def validate priv_level
-      unless @category.validate priv_level, currentUser
-        flash[:notice] = "You are not authorized!"
+    def validate privilege_level
+      unless @category.validate privilege_level, currentUser
+        flash[:notice] = 'You are not authorized!'
         redirect_to :back
       end
     end

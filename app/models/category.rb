@@ -7,17 +7,17 @@ class Category < ActiveRecord::Base
   before_create :set_proper_order
 
 
-  def validate priv_level, tem_user
+  def validate privilege_level, tem_user
     if self.mode == 'private'
-      self.privileges.each do |priv|
-        if priv.user == tem_user && priv.mode >= priv_level
+      self.privileges.each do |privilege|
+        if privilege.user == tem_user && privilege.mode >= privilege_level
           return true
         end
       end
       return false
     else
       if self.parent
-        return self.parent.validate(priv_level, tem_user)
+        return self.parent.validate(privilege_level, tem_user)
       else
         return true
       end
@@ -32,6 +32,7 @@ class Category < ActiveRecord::Base
     return result
   end
 
+  # TODO: Add relevant controller, routes and views.
   def create_privileges user_list
     user_list.each do |user|
       CategoryPrivilege.create(user: user, category: self, mode: "read")
@@ -88,7 +89,7 @@ class Category < ActiveRecord::Base
       return false
     end
     user_list.each do |user|
-      CategoryPrivilege.creaet(user: user, category: self, mode: priv_level)
+      CategoryPrivilege.create(user: user, category: self, mode: priv_level)
     end
     return true
   end

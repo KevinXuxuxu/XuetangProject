@@ -8,8 +8,8 @@ Xuetang::Application.routes.draw do
 
   resources :topics do
     member do
-      get 'upward'
-      get 'downward'
+      get :upward
+      get :downward
     end
   end
 
@@ -21,8 +21,9 @@ Xuetang::Application.routes.draw do
 
   resources :categories do
     member do
-      get 'upward'
-      get 'downward'
+      get :upward
+      get :downward
+      post :generate_privilege
     end
   end
 
@@ -30,9 +31,9 @@ Xuetang::Application.routes.draw do
 
   post '/' => 'index#index'
 
-  get 'login' => 'login#receive'
+  get :login => 'login#receive'
 
-  get 'personal' => 'personal#index'
+  get :personal => 'personal#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

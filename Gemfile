@@ -4,7 +4,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'database_cleaner'
-  gem 'sqlite3'
+  # gem 'sqlite3'
   gem 'simplecov'
 end
 group :debug do

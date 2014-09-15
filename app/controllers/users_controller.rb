@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
+  # TODO Eliminate create method because User should only be generated automatically.
+  # TODO Set privilege control for user configuration.
+
   # GET /users
   # GET /users.json
   def index

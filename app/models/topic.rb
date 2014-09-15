@@ -23,6 +23,7 @@ class Topic < ActiveRecord::Base
     end
   end
 
+  # TODO: Add relevant controller, view and route
   def generate_privileges user_list, priv_level
     if self.mode == 'public'
       return false
