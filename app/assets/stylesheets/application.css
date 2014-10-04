@@ -12,5 +12,6 @@
  *= require bootstrap_and_overrides
  *= require bootstrap-tagsinput
  *= require bootstrap-typeahead
+ *= require z
  *= require_tree .
  */
