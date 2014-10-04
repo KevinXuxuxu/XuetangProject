@@ -1,0 +1,37 @@
+%p#notice= notice
+
+%h2= @category.name
+= @category.description
+%br
+%br
+
+%table
+  - if @sub_categories.size > 0
+    %thead
+      %tr
+        %th Name
+        %th Description
+        %th Parent
+        %th
+          %th
+            %th
+
+    %tbody
+      - @sub_categories.each do |sub_category|
+        %tr
+          %td= sub_category.name
+          %td= sub_category.description
+          %td
+            - if sub_category.parent
+              = sub_category.parent.name
+            - else
+              N/A
+          %td= link_to 'Show', sub_category, :id => "show_#{sub_category.name}"
+          %td= link_to 'Edit', edit_category_path(sub_category), :id => "edit_#{sub_category.name}"
+          %td= link_to 'Destroy', sub_category, method: :delete, data: {confirm: 'Are you sure?'}
+  - else
+    No sub categories!
+%br
+
+= link_to 'Edit', edit_category_path(@category)
+= link_to 'Back', categories_path
